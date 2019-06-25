@@ -2,6 +2,7 @@
 
 namespace GraphQL\QueryBuilder;
 
+use GraphQL\EnumAbstract;
 use GraphQL\Exception\EmptySelectionSetException;
 use GraphQL\Query;
 use GraphQL\RawObject;
@@ -84,7 +85,11 @@ abstract class AbstractQueryBuilder implements QueryBuilderInterface
      */
     protected function setArgument(string $argumentName, $argumentValue)
     {
-        if (is_scalar($argumentValue) || is_array($argumentValue) || $argumentValue instanceof RawObject) {
+        if (is_scalar($argumentValue)
+            || is_array($argumentValue)
+            || $argumentValue instanceof RawObject
+            || $argumentValue instanceof EnumAbstract
+        ) {
             $this->argumentsList[$argumentName] = $argumentValue;
         }
 

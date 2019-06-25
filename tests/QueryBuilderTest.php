@@ -6,6 +6,7 @@ use GraphQL\Exception\EmptySelectionSetException;
 use GraphQL\Query;
 use GraphQL\QueryBuilder\QueryBuilder;
 use GraphQL\RawObject;
+use GraphQL\Tests\TestClasses\EnumTest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -202,5 +203,22 @@ another_field
 }',
             (string) $this->queryBuilder->getQuery()
         );
+    }
+
+    public function testEnumQuery()
+    {
+
+        $enum = new EnumTest("ONE");
+
+        $this->queryBuilder = new QueryBuilder("GetEnum");
+        $this->queryBuilder->selectField("obj")
+            ->setArgument('enum', $enum);
+
+        $this->assertEquals('query {
+GetEnum(enum: ONE) {
+obj
+}
+}',
+            (string)$this->queryBuilder->getQuery());
     }
 }
