@@ -48,17 +48,6 @@ field_one
 
     /**
      * @covers \GraphQL\QueryBuilder\QueryBuilder::getQuery
-     * @covers \GraphQL\QueryBuilder\AbstractQueryBuilder::getQuery
-     * @covers \GraphQL\Exception\EmptySelectionSetException
-     */
-    public function testEmptySelectionSet()
-    {
-        $this->expectException(EmptySelectionSetException::class);
-        $this->queryBuilder->getQuery();
-    }
-
-    /**
-     * @covers \GraphQL\QueryBuilder\QueryBuilder::getQuery
      * @covers \GraphQL\QueryBuilder\QueryBuilder::selectField
      * @covers \GraphQL\QueryBuilder\AbstractQueryBuilder::selectField
      */
@@ -218,6 +207,22 @@ another_field
 GetEnum(enum: ONE) {
 obj
 }
+}',
+            (string)$this->queryBuilder->getQuery());
+    }
+
+    public function testNoSelectionQuery()
+    {
+
+        $enum = new EnumTest("ONE");
+
+        $this->queryBuilder = new QueryBuilder("GetEnum");
+        $this->queryBuilder
+            ->selectField(null)
+            ->setArgument('enum', $enum);
+
+        $this->assertEquals('query {
+GetEnum(enum: ONE) 
 }',
             (string)$this->queryBuilder->getQuery());
     }

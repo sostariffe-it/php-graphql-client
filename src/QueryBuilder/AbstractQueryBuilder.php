@@ -46,9 +46,9 @@ abstract class AbstractQueryBuilder implements QueryBuilderInterface
      */
     public function getQuery(): Query
     {
-        if (empty($this->selectionSet)) {
+        /*if (empty($this->selectionSet)) {
             throw new EmptySelectionSetException(static::class);
-        }
+        }*/
 
         // Convert nested query builders to query objects
         foreach ($this->selectionSet as $key => $field) {
