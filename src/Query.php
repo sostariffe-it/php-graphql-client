@@ -4,6 +4,8 @@ namespace GraphQL;
 
 use GraphQL\Exception\ArgumentException;
 use GraphQL\Exception\InvalidSelectionException;
+use GraphQL\Util\ConvertArgument;
+use GraphQL\Util\JsonSerializableFormatter;
 use GraphQL\Util\StringLiteralFormatter;
 
 /**
@@ -140,15 +142,8 @@ class Query
             }
 
             // Convert argument values to graphql string literal equivalent
-            if (is_scalar($value)) {
-                // Convert scalar value to its literal in graphql
-                $value = StringLiteralFormatter::formatValueForRHS($value);
-            } elseif (is_array($value)) {
-                // Convert PHP array to its array representation in graphql arguments
-                $value = StringLiteralFormatter::formatArrayForGQLQuery($value);
-            } elseif ($value instanceof EnumAbstract) {
-                $value = (string) $value;
-            }
+            $value = ConvertArgument::convertArgument($value);
+
             // TODO: Handle cases where a non-string-convertible object is added to the arguments
             $constraintsString .= $name . ': ' . $value;
         }

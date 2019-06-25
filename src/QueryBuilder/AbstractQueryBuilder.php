@@ -89,6 +89,7 @@ abstract class AbstractQueryBuilder implements QueryBuilderInterface
             || is_array($argumentValue)
             || $argumentValue instanceof RawObject
             || $argumentValue instanceof EnumAbstract
+            || $argumentValue instanceof \JsonSerializable
         ) {
             $this->argumentsList[$argumentName] = $argumentValue;
         }

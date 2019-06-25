@@ -44,15 +44,11 @@ class StringLiteralFormatter
     public static function formatArrayForGQLQuery(array $array): string
     {
         $arrString = '[';
-        $first = true;
+        $arrayRow = [];
         foreach ($array as $element) {
-            if ($first) {
-                $first = false;
-            } else {
-                $arrString .= ', ';
-            }
-            $arrString .= StringLiteralFormatter::formatValueForRHS($element);
+            $arrayRow[] = ConvertArgument::convertArgument($element);
         }
+        $arrString .= implode(",", $arrayRow);
         $arrString .= ']';
 
         return $arrString;

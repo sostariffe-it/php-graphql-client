@@ -7,6 +7,7 @@ use GraphQL\Query;
 use GraphQL\QueryBuilder\QueryBuilder;
 use GraphQL\RawObject;
 use GraphQL\Tests\TestClasses\EnumTest;
+use GraphQL\Tests\TestClasses\TestJSON;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -223,6 +224,33 @@ obj
 
         $this->assertEquals('query {
 GetEnum(enum: ONE) 
+}',
+            (string)$this->queryBuilder->getQuery());
+    }
+
+
+    public function testJsonSerializable()
+    {
+
+        $obj = new TestJSON();
+
+        $this->queryBuilder = new QueryBuilder("GetJSON");
+        $this->queryBuilder
+            ->selectField(null)
+            ->setArgument('jsonable', [ $obj ]);
+        echo (string)$this->queryBuilder->getQuery();
+        exit;
+
+
+        $this->assertEquals('query {
+GetJSON(jsonable: {
+test_name: 12
+test_name_1: "hi!"
+enum: TWO
+nested: {
+test_name: 34
+}
+}) 
 }',
             (string)$this->queryBuilder->getQuery());
     }
