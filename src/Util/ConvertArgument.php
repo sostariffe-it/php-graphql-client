@@ -24,6 +24,8 @@ class ConvertArgument
             $value = StringLiteralFormatter::formatArrayForGQLQuery($value);
         } elseif ($value instanceof EnumAbstract) {
             $value = (string)$value;
+        } elseif (is_null($value)) {
+            $value = "null";
         }
         return $value;
     }
