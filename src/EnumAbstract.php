@@ -1,24 +1,33 @@
 <?php
-
-
 namespace GraphQL;
+
+use GraphQL\Exception\EnumError;
 
 /**
  * Class EnumAbstract
  */
 abstract class EnumAbstract
 {
-
+    /**
+     * @var string
+     */
     private $value;
+
     /**
      * @var array
      */
     protected $possible_values;
 
+    /**
+     * EnumAbstract constructor.
+     *
+     * @param string $value
+     * @throws EnumError
+     */
     public function __construct(string $value)
     {
-
         $this->setPossibleValues();
+
         if (count($this->possible_values) === 0) {
             throw new EnumError("You must set the enum possible values on setPossibleValues");
         }
@@ -26,11 +35,14 @@ abstract class EnumAbstract
         $this->checkValue($value);
 
         $this->value = $value;
-
     }
 
     abstract public function setPossibleValues();
 
+    /**
+     * @param $value
+     * @throws EnumError
+     */
     private function checkValue($value)
     {
         if(!in_array($value, $this->possible_values)){
@@ -52,6 +64,7 @@ abstract class EnumAbstract
      * Set Object Value
      *
      * @param mixed $value
+     * @throws EnumError
      */
     public function setValue($value): void
     {
@@ -62,7 +75,7 @@ abstract class EnumAbstract
     /**
      * Echo the value
      *
-     * @return stringa
+     * @return string
      */
     public function __toString()
     {
