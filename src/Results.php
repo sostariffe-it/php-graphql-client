@@ -71,7 +71,7 @@ class Results
     public function getData()
     {
         if (is_array($this->results)) {
-            return $this->results['data'];
+            return $this->results['data'] ?? [];
         }
 
         return $this->results->data;
