@@ -148,7 +148,7 @@ field
         $this->queryBuilder->setArgument('array_arg', ['one', 'two', 'three']);
         $this->assertEquals(
             'query {
-Object(str_arg: "value" bool_arg: true int_arg: 10 array_arg: ["one", "two", "three"]) {
+Object(str_arg: "value" bool_arg: true int_arg: 10 array_arg: ["one","two","three"]) {
 field
 }
 }',
@@ -158,7 +158,7 @@ field
         $this->queryBuilder->setArgument('input_object_arg', new RawObject('{field_not: "x"}'));
         $this->assertEquals(
             'query {
-Object(str_arg: "value" bool_arg: true int_arg: 10 array_arg: ["one", "two", "three"] input_object_arg: {field_not: "x"}) {
+Object(str_arg: "value" bool_arg: true int_arg: 10 array_arg: ["one","two","three"] input_object_arg: {field_not: "x"}) {
 field
 }
 }',
@@ -185,7 +185,7 @@ field
         $this->assertEquals(
             'query {
 Object(outer_arg: "outer val") {
-Nested(nested_arg: [1, 2, 3]) {
+Nested(nested_arg: [1,2,3]) {
 some_field
 another_field
 }
@@ -238,19 +238,16 @@ GetEnum(enum: ONE)
         $this->queryBuilder
             ->selectField(null)
             ->setArgument('jsonable', [ $obj ]);
-        echo (string)$this->queryBuilder->getQuery();
-        exit;
-
 
         $this->assertEquals('query {
-GetJSON(jsonable: {
+GetJSON(jsonable: [{
 test_name: 12
 test_name_1: "hi!"
 enum: TWO
 nested: {
 test_name: 34
 }
-}) 
+}]) 
 }',
             (string)$this->queryBuilder->getQuery());
     }
