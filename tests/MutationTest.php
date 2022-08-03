@@ -16,9 +16,7 @@ class MutationTest extends TestCase
 
         $this->assertEquals(
             'mutation {
-createObject {
-
-}
+createObject 
 }',
             (string) $mutation
         );
@@ -32,9 +30,7 @@ createObject {
         $mutation = new Mutation('mutation');
 
         $this->assertEquals(
-            'mutation {
-
-}',
+            'mutation ',
             (string) $mutation
         );
     }

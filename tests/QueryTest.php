@@ -51,9 +51,7 @@ class QueryTest extends TestCase
         $query = new Query('query');
 
         $this->assertEquals(
-            "query {
-
-}",
+            "query ",
             (string) $query
         );
 
@@ -65,9 +63,7 @@ class QueryTest extends TestCase
 
         $this->assertEquals(
             "query {
-Object {
-
-}
+Object 
 }",
             (string) $query
         );
@@ -86,9 +82,7 @@ Object {
     {
         $this->assertEquals(
             "query {
-Object {
-
-}
+Object 
 }",
             (string) $query,
             'Incorrect empty query string'
@@ -130,9 +124,7 @@ Object {
         $query->setArguments(['arg1' => 'value']);
         $this->assertEquals(
             "query {
-Object(arg1: \"value\") {
-
-}
+Object(arg1: \"value\") 
 }",
             (string) $query,
             'Query has improperly formatted parameter list'
@@ -156,9 +148,7 @@ Object(arg1: \"value\") {
         $query->setArguments(['arg1' => 23]);
         $this->assertEquals(
             "query {
-Object(arg1: 23) {
-
-}
+Object(arg1: 23) 
 }",
             (string) $query
         );
@@ -181,9 +171,7 @@ Object(arg1: 23) {
         $query->setArguments(['arg1' => true]);
         $this->assertEquals(
             "query {
-Object(arg1: true) {
-
-}
+Object(arg1: true) 
 }",
             (string) $query
         );
@@ -206,9 +194,7 @@ Object(arg1: true) {
         $query->setArguments(['arg1' => [1, 2, 3]]);
         $this->assertEquals(
             "query {
-Object(arg1: [1, 2, 3]) {
-
-}
+Object(arg1: [1,2,3]) 
 }",
             (string) $query
         );
@@ -232,9 +218,7 @@ Object(arg1: [1, 2, 3]) {
         $query->setArguments(['obj' => new RawObject('{json_string_array: ["json value"]}')]);
         $this->assertEquals(
             "query {
-Object(obj: {json_string_array: [\"json value\"]}) {
-
-}
+Object(obj: {json_string_array: [\"json value\"]}) 
 }"
             , (string) $query
         );
@@ -257,9 +241,7 @@ Object(obj: {json_string_array: [\"json value\"]}) {
         $query->setArguments(['arg1' => ['one', 'two', 'three']]);
         $this->assertEquals(
             "query {
-Object(arg1: [\"one\", \"two\", \"three\"]) {
-
-}
+Object(arg1: [\"one\",\"two\",\"three\"]) 
 }",
             (string) $query
         );
@@ -284,9 +266,7 @@ Object(arg1: [\"one\", \"two\", \"three\"]) {
         $query->setArguments(['arg1' => 'val1', 'arg2' => 2, 'arg3' => true]);
         $this->assertEquals(
             "query {
-Object(arg1: \"val1\" arg2: 2 arg3: true) {
-
-}
+Object(arg1: \"val1\" arg2: 2 arg3: true) 
 }",
             (string) $query,
             'Query has improperly formatted parameter list'

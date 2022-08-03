@@ -68,19 +68,19 @@ class StringLiteralFormatterTest extends TestCase
 
         $twoValueArray = [1, 2];
         $stringArray = StringLiteralFormatter::formatArrayForGQLQuery($twoValueArray);
-        $this->assertEquals('[1, 2]', $stringArray);
+        $this->assertEquals('[1,2]', $stringArray);
 
         $stringArray = ['one', 'two'];
         $stringArray = StringLiteralFormatter::formatArrayForGQLQuery($stringArray);
-        $this->assertEquals('["one", "two"]', $stringArray);
+        $this->assertEquals('["one","two"]', $stringArray);
 
         $booleanArray = [true, false];
         $stringArray = StringLiteralFormatter::formatArrayForGQLQuery($booleanArray);
-        $this->assertEquals('[true, false]', $stringArray);
+        $this->assertEquals('[true,false]', $stringArray);
 
         $floatArray = [1.1, 2.2];
         $stringArray = StringLiteralFormatter::formatArrayForGQLQuery($floatArray);
-        $this->assertEquals('[1.1, 2.2]', $stringArray);
+        $this->assertEquals('[1.1,2.2]', $stringArray);
     }
 
     /**
